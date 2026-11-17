@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dấu ấn di sản Quảng Trị</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: dải xanh Trường Sơn mở đầu bằng vĩ tuyến 17; bên dưới là sơ đồ Bắc–Nam cạnh danh sách thẻ; mỗi di tích có trang riêng theo hash. */
+:root{
+  --font:"Be Vietnam Pro","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --bg:#f2f6f1; --surface:#ffffff; --ink:#13241b; --muted:#506157; --line:#d2dcd4;
+  --green:#1f5a42; --green-2:#2e7a58; --soft:#e2eee5;
+  --laterite:#98481a; --laterite-soft:#f4e5d9;
+  --focus:#0b57d0; --btn-bg:#1f5a42; --btn-fg:#ffffff;
+  --hero-bg:#143d2d; --hero-ink:#eef6f0; --hero-muted:#b5cfbf; --hero-line:#e0a06a; --hero-stroke:#3f7b60;
+  --sea:#e3eee5; --land:#ffffff;
+  --bac-a:#1c4b37; --bac-b:#357a5a; --nam-a:#6e3b0c; --nam-b:#a76224;
+  --gut-l:max(16px, env(safe-area-inset-left, 0px)); --gut-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1712; --surface:#14221a; --ink:#e5eee7; --muted:#a2b3a8; --line:#27382e;
+    --green:#86d2a6; --green-2:#62b887; --soft:#1b3024;
+    --laterite:#f0a672; --laterite-soft:#33231a;
+    --focus:#8ab4ff; --btn-bg:#86d2a6; --btn-fg:#0d1712;
+    --hero-bg:#0a1f16; --hero-ink:#e9f3ec; --hero-muted:#9cb8a8; --hero-line:#e9a46e; --hero-stroke:#2f6049;
+    --sea:#102219; --land:#16261d; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1712; --surface:#14221a; --ink:#e5eee7; --muted:#a2b3a8; --line:#27382e;
+  --green:#86d2a6; --green-2:#62b887; --soft:#1b3024;
+  --laterite:#f0a672; --laterite-soft:#33231a;
+  --focus:#8ab4ff; --btn-bg:#86d2a6; --btn-fg:#0d1712;
+  --hero-bg:#0a1f16; --hero-ink:#e9f3ec; --hero-muted:#9cb8a8; --hero-line:#e9a46e; --hero-stroke:#2f6049;
+  --sea:#102219; --land:#16261d; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font:400 16px/1.6 var(--font);background:var(--bg);color:var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--hero-bg)}
+h1,h2,h3{font-family:var(--font);text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--surface);color:var(--ink);padding:10px 14px;border-radius:8px;z-index:50}
+.skip:focus{left:16px}
+
+/* thanh đầu trang */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hero-bg);color:var(--hero-ink);border-bottom:1px solid color-mix(in srgb,var(--hero-ink) 14%,transparent)}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 16px;padding-block:8px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;letter-spacing:.01em;min-height:44px;white-space:nowrap}
+.brand svg{width:30px;height:30px;flex:none}
+.nav{display:flex;gap:4px;overflow-x:auto;order:3;width:100%}
+.nav a{padding:10px 10px;text-decoration:none;border-radius:8px;color:var(--hero-muted);font-size:.95rem;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
+.nav a:hover{color:var(--hero-ink);background:color-mix(in srgb,var(--hero-ink) 10%,transparent)}
+.lang{flex:none;display:flex;border:1px solid color-mix(in srgb,var(--hero-ink) 35%,transparent);border-radius:999px;overflow:hidden}
+.lang button{white-space:nowrap;border:0;background:transparent;color:var(--hero-ink);padding:8px 14px;font:500 .9rem var(--font);cursor:pointer;min-height:44px}
+.lang button[aria-pressed="true"]{background:var(--hero-ink);color:var(--hero-bg)}
+@media (min-width:1060px){ .nav{order:0;width:auto;margin-left:auto;min-width:0} .top .wrap{flex-wrap:nowrap} }
+
+/* mở đầu */
+.hero{background:var(--hero-bg);color:var(--hero-ink);padding-block:48px 56px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:32px;align-items:center}
+.eyebrow{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--hero-line);font-weight:600}
+.hero h1{font-size:clamp(2.1rem,5.4vw,3.6rem);line-height:1.08;font-weight:800;margin:10px 0 16px;letter-spacing:-.01em}
+.lede{font-size:1.1rem;color:var(--hero-muted);max-width:56ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;border-radius:10px;border:1.5px solid var(--btn-bg);background:var(--btn-bg);color:var(--btn-fg);text-decoration:none;font:600 .95rem var(--font);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--green);border-color:var(--green)}
+.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.hero .btn{background:var(--hero-ink);color:var(--hero-bg);border-color:var(--hero-ink)}
+.hero .btn.ghost{background:transparent;color:var(--hero-ink);border-color:color-mix(in srgb,var(--hero-ink) 50%,transparent)}
+.hero-note{margin-top:18px;font-size:.88rem;color:var(--hero-muted)}
+.hero-art{width:100%;height:auto}
+.hero-art text{font-family:var(--font)}
+@media (max-width:820px){ .hero .wrap{grid-template-columns:1fr} .hero-art{max-width:420px} }
+
+/* khối chung */
+section{scroll-margin-top:120px}
+.sec{padding-block:48px}
+.sec h2{font-size:clamp(1.5rem,3.4vw,2rem);line-height:1.2;font-weight:700;color:var(--green)}
+.sec .intro{color:var(--muted);margin-top:8px;max-width:62ch}
+
+/* công cụ lọc */
+.tools{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;margin:20px 0 8px;align-items:end}
+.tools label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:4px;font-weight:500}
+.tools input,.tools select{width:100%;min-height:46px;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:400 1rem var(--font)}
+.tools .clear{min-height:46px;padding:9px 16px;border:1.5px solid var(--green);color:var(--green);background:transparent;border-radius:10px;font:600 .92rem var(--font);cursor:pointer}
+.status{margin:6px 0 14px;color:var(--muted);font-size:.95rem;min-height:1.5em}
+.views{display:none;gap:8px;margin-bottom:12px}
+.views button{flex:1;min-height:46px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;font:500 .95rem var(--font);cursor:pointer}
+.views button[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg)}
+.layout{display:grid;grid-template-columns:minmax(280px,390px) minmax(0,1fr);gap:22px;align-items:start}
+.mapbox{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 120px)}
+.mapbox h3{font-size:1rem;margin:2px 4px 8px;color:var(--green)}
+.mapbox svg{width:100%;height:auto;display:block}
+.mapnote{font-size:.8rem;color:var(--muted);margin:8px 4px 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:8px 4px 0;font-size:.85rem}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.sea{fill:var(--sea)} .land{fill:var(--land);stroke:var(--line);stroke-width:1}
+.parallel{stroke:var(--laterite);stroke-width:1.6;stroke-dasharray:6 5}
+.axis{fill:var(--muted);font-size:11px;font-family:var(--font)}
+.node{cursor:pointer}
+.node circle{stroke:var(--surface);stroke-width:2}
+.node.bac circle{fill:var(--green-2)} .node.nam circle{fill:var(--laterite)}
+.node text{font-size:11.5px;fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:3px;font-family:var(--font)}
+.node.dim{opacity:.18}
+.node.on circle{r:12;stroke:var(--focus);stroke-width:3}
+.node:focus-visible circle{stroke:var(--focus);stroke-width:3}
+
+/* thẻ di tích */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.card.on{border-color:var(--focus);box-shadow:0 0 0 3px color-mix(in srgb,var(--focus) 28%,transparent)}
+.ph{height:92px;display:flex;align-items:flex-end;justify-content:space-between;padding:12px 16px;color:#fff}
+.ph.bac{background:linear-gradient(135deg,var(--bac-a),var(--bac-b))}
+.ph.nam{background:linear-gradient(135deg,var(--nam-a),var(--nam-b))}
+.ph .num{font-size:2.4rem;font-weight:800;line-height:1;letter-spacing:-.02em;opacity:.95}
+.ph .reg{font-size:.78rem;background:rgba(0,0,0,.28);padding:3px 10px;border-radius:999px;font-weight:500}
+.cbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.cbody h3{font-size:1.1rem;line-height:1.3;font-weight:700}
+.cbody .alt{color:var(--muted);font-size:.9rem;font-style:italic}
+.cbody .sum{font-size:.92rem;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.75rem;background:var(--soft);color:var(--green);padding:3px 10px;border-radius:999px;font-weight:500}
+.vid{font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+.vid::before{content:"";width:0;height:0;border-left:8px solid var(--laterite);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.row{display:flex;gap:8px;margin-top:auto;padding-top:10px;flex-wrap:wrap}
+.empty{padding:32px;text-align:center;background:var(--surface);border:1.5px dashed var(--line);border-radius:16px;color:var(--muted)}
+
+/* cách dùng */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:24px;padding:0;list-style:none;counter-reset:st}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 18px 20px;counter-increment:st}
+.steps li::before{content:counter(st);display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--soft);color:var(--green);font-weight:700;margin-bottom:10px}
+.steps h3{font-size:1.05rem;margin-bottom:6px}
+.steps p{color:var(--muted);font-size:.95rem}
+.tip{margin-top:16px;color:var(--muted);font-size:.95rem}
+
+/* giới thiệu */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-top:20px}
+.about .box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
+.about h3{font-size:1.05rem;color:var(--green);margin-bottom:8px}
+.about .box p{color:var(--muted);font-size:.96rem}
+.about .box.warn{background:var(--laterite-soft);border-color:transparent}
+.about .box.warn h3{color:var(--laterite)}
+@media (max-width:760px){ .about{grid-template-columns:1fr} }
+
+/* trang chi tiết */
+.dwrap{padding-block:28px 56px}
+.back{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:var(--green);font-weight:600;text-decoration:none}
+.dhead{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:flex-end}
+.dhead .big{font-size:clamp(3rem,9vw,5.5rem);font-weight:800;line-height:.9;letter-spacing:-.03em;color:var(--green-2);opacity:.55}
+.dhead h1{font-size:clamp(1.8rem,4.6vw,2.8rem);line-height:1.12;font-weight:800;color:var(--green)}
+.dhead .altn{color:var(--muted);font-style:italic;font-size:1.05rem;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.chip{font-size:.8rem;padding:4px 12px;border-radius:999px;font-weight:600;background:var(--soft);color:var(--green)}
+.chip.bac{background:var(--soft);color:var(--green)}
+.chip.nam{background:var(--laterite-soft);color:var(--laterite)}
+.player{margin-top:22px;aspect-ratio:16/9;width:100%;max-width:860px;border-radius:18px;display:grid;place-items:center;text-align:center;padding:20px;color:#fff;position:relative;overflow:hidden}
+.player.bac{background:linear-gradient(135deg,var(--bac-a),var(--bac-b))}
+.player.nam{background:linear-gradient(135deg,var(--nam-a),var(--nam-b))}
+.player.has{padding:0;background:#000}
+.vwrap{margin-top:22px;max-width:860px}
+.vwrap .player{margin-top:10px}
+.player video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.vtabs{display:flex;flex-wrap:wrap;gap:8px}
+.vtab{min-height:44px;padding:8px 16px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;font:500 .92rem var(--font);cursor:pointer}
+.vtab[aria-selected="true"]{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg)}
+.vcap{margin-top:8px;color:var(--muted);font-size:.95rem}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player .play{width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.7);display:grid;place-items:center;margin:0 auto 12px}
+.player .play::after{content:"";margin-left:5px;border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent}
+.player strong{display:block;font-size:1.15rem}
+.player span{font-size:.92rem;opacity:.92}
+.dgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;margin-top:28px;align-items:start}
+.dgrid.both{grid-template-columns:minmax(0,1fr)}
+.lang2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.dsum h2,.facts h2,.fb h2{font-size:1.05rem;color:var(--green);margin-bottom:8px}
+.dsum p{font-size:1.02rem;max-width:68ch}
+.dsum .lbl{display:block;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600}
+.facts{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}
+.facts dl{margin:0;display:grid;gap:12px}
+.facts dt{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.facts dd{margin:2px 0 0;font-size:.95rem}
+.verify{display:inline-block;font-size:.72rem;font-weight:700;background:var(--laterite-soft);color:var(--laterite);border-radius:999px;padding:2px 9px;margin-bottom:8px}
+.fb{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between}
+.fb p{color:var(--muted);font-size:.95rem;max-width:58ch}
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.pn a{display:block;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:14px 16px;text-decoration:none;min-height:64px}
+.pn a small{display:block;color:var(--muted);font-size:.78rem}
+.pn a b{color:var(--green)}
+.pn a:last-child{text-align:right}
+.pn .ghost{visibility:hidden}
+@media (max-width:820px){
+  .tools{grid-template-columns:1fr 1fr}
+  .tools .q,.tools .clear{grid-column:1/-1}
+  .views{display:flex}
+  .layout{grid-template-columns:1fr}
+  .mapbox{position:static}
+  .layout[data-view="list"] .mapbox{display:none}
+  .layout[data-view="map"] .cardsbox{display:none}
+  .dgrid{grid-template-columns:minmax(0,1fr)}
+}
+
+/* dòng thời gian */
+.timeline{list-style:none;margin:26px 0 0;padding:0 0 0 18px;border-left:3px solid var(--green-2);display:grid;gap:18px}
+.timeline li{position:relative;display:grid;grid-template-columns:150px minmax(0,1fr);gap:6px 18px;align-items:baseline}
+.timeline li::before{content:"";position:absolute;left:-27px;top:9px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--laterite)}
+.timeline .yr{font-weight:800;color:var(--laterite);font-size:1.05rem;font-variant-numeric:tabular-nums}
+.timeline .ev p{font-size:1rem}
+.timeline .ev a{display:inline-block;margin-top:4px;color:var(--green);font-weight:600;font-size:.92rem;text-decoration:none;min-height:32px}
+.timeline .ev a:hover{text-decoration:underline}
+@media (max-width:640px){ .timeline li{grid-template-columns:1fr} }
+/* câu đố */
+.quiz{margin-top:22px;max-width:760px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.qprog{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.qq{font-size:1.25rem;line-height:1.35;margin:8px 0 16px;color:var(--ink)}
+.qopts{display:grid;gap:10px}
+.qo{min-height:50px;text-align:left;padding:10px 16px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;font:500 1rem var(--font);cursor:pointer}
+.qo:hover:not(:disabled){border-color:var(--green-2)}
+.qo:disabled{cursor:default}
+.qo.ok{border-color:var(--green-2);background:var(--soft)}
+.qo.bad{border-color:var(--laterite);background:var(--laterite-soft)}
+.qo b{margin-left:8px;font-size:.85rem}
+.qexp{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+.qexp p{margin-bottom:12px}
+.qdone{text-align:center;padding:12px 0}
+.qscore{font-size:3rem;font-weight:800;color:var(--green);line-height:1.1}
+.qdone p{margin-bottom:14px}
+/* từ khó */
+.glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:22px}
+.gcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}
+.gcard h3{font-size:1.05rem;color:var(--green);margin-bottom:6px}
+.gcard p{color:var(--muted);font-size:.95rem}
+.en2{font-style:italic;margin-top:4px}
+/* số liệu nhanh và suy ngẫm */
+.qh{font-size:1.05rem;color:var(--green);margin-top:28px}
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:10px}
+.qf{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:4px;align-content:start}
+.qf b{font-size:1.6rem;line-height:1.15;color:var(--laterite);font-weight:800}
+.qf span{color:var(--muted);font-size:.9rem}
+.qf i{display:block;margin-top:2px}
+.think{margin-top:28px;background:var(--soft);border-radius:16px;padding:20px}
+.think h2{font-size:1.05rem;color:var(--green)}
+.thint{color:var(--muted);font-size:.92rem;margin:4px 0 10px}
+.think ol{margin:0;padding-left:22px;display:grid;gap:10px}
+.think li i{display:block;color:var(--muted);font-size:.95rem}
+footer{background:var(--hero-bg);color:var(--hero-muted);padding-block:28px;font-size:.85rem}
+footer .wrap{display:grid;gap:8px}
+footer b{color:var(--hero-ink)}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important;animation:none!important} }
+</style>
+</head>
+<body>
+
+
+<a class="skip" href="#kham-pha" id="skip">Đi tới nội dung</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Trang chủ / Home">
+      <svg viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="8" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="4" y1="15" x2="26" y2="15" stroke="var(--hero-line)" stroke-width="2" stroke-dasharray="4 3"/><circle cx="21" cy="9" r="2.6" fill="currentColor"/><circle cx="10" cy="21" r="2.6" fill="currentColor"/></svg>
+      <span id="brand">Dấu ấn di sản Quảng Trị</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Điều hướng"></nav>
+    <div class="lang" role="group" aria-label="Ngôn ngữ / Language">
+      <button type="button" id="bvi" aria-pressed="true">Việt</button>
+      <button type="button" id="ben" aria-pressed="false">English</button>
+      <button type="button" id="bboth" aria-pressed="false">Việt | EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow" id="eyebrow"></p>
+        <h1 id="h1"></h1>
+        <p class="lede" id="lede"></p>
+        <div class="hero-cta">
+          <a class="btn" id="cta1" href="#kham-pha"></a>
+          <a class="btn ghost" id="cta2" href="#huong-dan"></a>
+        </div>
+        <p class="hero-note" id="heronote"></p>
+      </div>
+      <svg class="hero-art" viewBox="0 0 400 280" role="img" aria-labelledby="arttitle">
+        <title id="arttitle">17°</title>
+        <text x="200" y="146" text-anchor="middle" font-size="128" font-weight="800" fill="none" stroke="var(--hero-stroke)" stroke-width="2">17°</text>
+        <line x1="0" y1="168" x2="400" y2="168" stroke="var(--hero-line)" stroke-width="2.4" stroke-dasharray="9 7"/>
+        <circle cx="200" cy="168" r="6" fill="var(--hero-line)"/>
+        <text id="artN" x="16" y="40" font-size="13" fill="var(--hero-muted)"></text>
+        <text id="artS" x="16" y="262" font-size="13" fill="var(--hero-muted)"></text>
+        <text id="artR" x="200" y="196" text-anchor="middle" font-size="13" fill="var(--hero-ink)"></text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="sec" id="kham-pha" aria-labelledby="h-explore">
+    <div class="wrap">
+      <h2 id="h-explore"></h2>
+      <p class="intro" id="i-explore"></p>
+      <div class="tools" role="search">
+        <div class="q"><label for="q" id="lq"></label><input id="q" type="search" autocomplete="off"></div>
+        <div><label for="fr" id="lfr"></label><select id="fr"></select></div>
+        <div><label for="ft" id="lft"></label><select id="ft"></select></div>
+        <div><label for="fv" id="lfv"></label><select id="fv"></select></div>
+        <button type="button" class="clear" id="clear"></button>
+      </div>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+      <div class="views" role="group" aria-label="View">
+        <button type="button" id="vmap" aria-pressed="true"></button>
+        <button type="button" id="vlist" aria-pressed="false"></button>
+      </div>
+      <div class="layout" id="layout" data-view="map">
+        <aside class="mapbox">
+          <h3 id="maptitle"></h3>
+          <svg id="svg" viewBox="0 0 360 560" role="group" aria-labelledby="maptitle"></svg>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--green-2)"></i><span id="lgbac"></span></span>
+            <span><i class="dot" style="background:var(--laterite)"></i><span id="lgnam"></span></span>
+          </div>
+          <p class="mapnote" id="mapnote"></p>
+        </aside>
+        <div class="cardsbox"><div class="cards" id="cards"></div></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="sec" id="moc-thoi-gian" aria-labelledby="h-time" style="background:var(--soft)">
+    <div class="wrap">
+      <h2 id="h-time"></h2>
+      <p class="intro" id="i-time"></p>
+      <ol class="timeline" id="timeline"></ol>
+      <p class="tip" id="timenote"></p>
+    </div>
+  </section>
+
+  <section class="sec" id="cau-do" aria-labelledby="h-quiz">
+    <div class="wrap">
+      <h2 id="h-quiz"></h2>
+      <p class="intro" id="i-quiz"></p>
+      <div class="quiz" id="quiz"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="tu-kho" aria-labelledby="h-gloss" style="background:var(--soft)">
+    <div class="wrap">
+      <h2 id="h-gloss"></h2>
+      <p class="intro" id="i-gloss"></p>
+      <div class="glossary" id="gloss"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="huong-dan" aria-labelledby="h-guide">
+    <div class="wrap">
+      <h2 id="h-guide"></h2>
+      <ol class="steps" id="steps"></ol>
+      <p class="tip" id="tip"></p>
+    </div>
+  </section>
+
+  <section class="sec" id="gioi-thieu" aria-labelledby="h-about">
+    <div class="wrap">
+      <h2 id="h-about"></h2>
+      <div class="about" id="about"></div>
+    </div>
+  </section>
+</main>
+
+<main id="detail" hidden></main>
+
+<footer>
+  <div class="wrap">
+    <p><b id="fname"></b></p>
+    <p id="foot"></p>
+  </div>
+</footer>
+
+<script src="videos.js"></script>
+<script>
+const SITES = [
+ {id:1, slug:"ben-pha-gianh", region:"bac", themes:["giao-thong"], status:"dang-bo-sung", y:70, x:236,
+  vi:{name:"Bến phà Gianh", sum:"Bến phà trên Quốc lộ 1A bắc qua sông Gianh. Trong kháng chiến chống Mỹ, đây là điểm giao thông huyết mạch bị đánh phá ác liệt, được gọi là “tọa độ lửa”. Khu di tích sau tôn tạo được khánh thành ngày 19/4/2026.",
+      addr:"Phường Bắc Gianh, tỉnh Quảng Trị (theo báo chí; cần đối chiếu).", rank:"Một số nguồn ghi: di tích quốc gia đặc biệt; chưa có số quyết định, cần đối chiếu."},
+  en:{name:"Gianh Ferry Landing", sum:"A ferry crossing on National Highway 1A over the Gianh River. During the war against the US it was a vital transport point, heavily bombed and known as a “fire coordinate”. The renovated memorial site was inaugurated on 19 April 2026.",
+      addr:"Bắc Gianh Ward, Quảng Trị Province (per news reports; to be verified).", rank:"Some sources list it as a special national monument; no decision number yet, to be verified."}},
+ {id:2, slug:"hang-tam-co", region:"bac", themes:["tnxp","giao-thong"], status:"dang-bo-sung", y:125, x:84,
+  vi:{name:"Hang Tám Cô", sum:"Hang đá ở km 16+500 trên Đường 20 Quyết Thắng. Ngày 14/11/1972, 13 cán bộ, chiến sĩ hy sinh trong hang, gồm 8 thanh niên xung phong và 5 pháo binh (theo báo Nhân Dân; các nguồn khác có thể ghi số liệu khác).",
+      addr:"Xã Thượng Trạch, tỉnh Quảng Trị (theo báo Nhân Dân).", rank:"Di tích quốc gia đặc biệt, Quyết định 2383/QĐ-TTg ngày 9/12/2013 (theo báo Nhân Dân; cần đối chiếu)."},
+  en:{name:"Tám Cô Cave", sum:"A rock cave at km 16+500 on Route 20 “Quyết Thắng”. On 14 November 1972, 13 officers and soldiers died in the cave: 8 youth volunteers and 5 artillerymen (per Nhân Dân newspaper; other sources may give different figures).",
+      addr:"Thượng Trạch Commune, Quảng Trị Province (per Nhân Dân).", rank:"Special national monument, Decision 2383/QĐ-TTg of 9 Dec 2013 (per Nhân Dân; to be verified)."}},
+ {id:3, slug:"pha-long-dai", region:"bac", themes:["tnxp","giao-thong"], status:"dang-bo-sung", y:200, x:196,
+  vi:{name:"Phà Long Đại", sum:"Bến phà trên Đường 15, được gọi là “yết hầu” nối hậu phương miền Bắc với chiến trường miền Nam. Tháng 9/1972, 16 thanh niên xung phong Đại đội 130 hy sinh tại đây trong các trận bom (19/9: 15 người; 23/9: 1 người).",
+      addr:"Xã Trường Ninh, tỉnh Quảng Trị (theo Báo Văn hóa).", rank:"Di tích lịch sử cấp quốc gia, quyết định của Bộ Văn hóa, Thể thao và Du lịch ngày 9/9/2025 (theo Báo Văn hóa; cần đối chiếu)."},
+  en:{name:"Long Đại Ferry", sum:"A ferry crossing on Route 15, called the “throat” linking the northern rear with the southern battlefield. In September 1972, 16 youth volunteers of Company 130 died here in air raids (19 Sept: 15; 23 Sept: 1).",
+      addr:"Trường Ninh Commune, Quảng Trị Province (per Báo Văn hóa).", rank:"National historical site, decision of the Ministry of Culture, Sports and Tourism dated 9 Sept 2025 (per Báo Văn hóa; to be verified)."}},
+ {id:4, slug:"ben-pha-xuan-son", region:"bac", themes:["giao-thong"], status:"dang-bo-sung", y:160, x:150,
+  vi:{name:"Bến phà Xuân Sơn", sum:"Bến phà qua sông Son gần Phong Nha, nối các đường 12 và 15 với Đường 20 Quyết Thắng (mở năm 1965). Trước đó là bến đò dân sinh; trong kháng chiến chống Mỹ trở thành điểm vận chuyển chi viện, sau này mở thêm “bến phà B” (thông tin từ trang du lịch, cần đối chiếu nguồn chính thống).",
+      addr:"Xã Sơn Trạch, huyện Bố Trạch (trước hợp nhất); đơn vị hành chính hiện hành cần kiểm tra.", rank:"Chưa kiểm chứng: một số trang du lịch ghi di tích quốc gia (1986) và quốc gia đặc biệt (2013); cần đối chiếu quyết định."},
+  en:{name:"Xuân Sơn Ferry", sum:"A ferry over the Son River near Phong Nha, linking Routes 12 and 15 with Route 20 “Quyết Thắng” (opened 1965). It began as a local crossing and became a supply transport point during the war; a second crossing, “Ferry B”, was added later (travel-site information; to be checked against official sources).",
+      addr:"Sơn Trạch Commune, Bố Trạch District (before the merger); current administrative unit to be checked.", rank:"Unverified: some travel sites list national (1986) and special national (2013) status; decisions to be checked."}},
+ {id:5, slug:"hien-luong-ben-hai", region:"nam", themes:["chia-cat"], status:"dang-bo-sung", y:262, x:208,
+  vi:{name:"Đôi bờ Hiền Lương – Bến Hải", sum:"Sau Hiệp định Genève 1954, cầu Hiền Lương trên sông Bến Hải (vĩ tuyến 17) trở thành giới tuyến quân sự tạm thời chia cắt hai miền. Cầu do Pháp xây năm 1952, bị đánh sập năm 1967 và được xây lại sau khi đất nước thống nhất. Di tích gồm cầu, kỳ đài, nhà liên hợp và nhà đón tiếp.",
+      addr:"Tỉnh Quảng Trị (hai bờ sông Bến Hải); xã/phường hiện hành cần kiểm tra.", rank:"Di tích quốc gia đặc biệt (năm xếp hạng cần đối chiếu)."},
+  en:{name:"Hiền Lương – Bến Hải Riverbanks", sum:"After the 1954 Geneva Accords, the Hiền Lương Bridge over the Bến Hải River (17th parallel) became the temporary military demarcation line dividing the two zones. Built by the French in 1952, it was destroyed in 1967 and rebuilt after reunification. The site includes the bridge, flag tower, joint house and reception house.",
+      addr:"Quảng Trị Province (both banks of the Bến Hải River); current commune/ward to be checked.", rank:"Special national monument (year of designation to be verified)."}},
+ {id:6, slug:"dia-dao-vinh-moc", region:"nam", themes:["doi-song"], status:"dang-bo-sung", y:305, x:268,
+  vi:{name:"Địa đạo Vịnh Mốc", sum:"Làng hầm dưới lòng đất của người dân Vĩnh Linh thời bom đạn Mỹ: đào từ năm 1965, dài gần 2.000 m, ba tầng sâu khoảng 8–10 m, 12–15 m và 20–23 m. Khoảng 60 gia đình sống trong hầm, có 17 em bé chào đời tại đây.",
+      addr:"Thôn Vịnh Mốc, xã Vĩnh Thạch, huyện Vĩnh Linh (trước hợp nhất); đơn vị hiện hành cần kiểm tra.", rank:"Di tích quốc gia đặc biệt, Quyết định 2408/QĐ-TTg ngày 31/12/2014 (theo Báo Văn hóa; cần đối chiếu)."},
+  en:{name:"Vịnh Mốc Tunnels", sum:"An underground village built by the people of Vĩnh Linh under US bombing: dug from 1965, nearly 2,000 m long, on three levels about 8–10 m, 12–15 m and 20–23 m deep. About 60 families lived inside and 17 babies were born there.",
+      addr:"Vịnh Mốc hamlet, Vĩnh Thạch Commune, Vĩnh Linh District (before the merger); current unit to be checked.", rank:"Special national monument, Decision 2408/QĐ-TTg of 31 Dec 2014 (per Báo Văn hóa; to be verified)."}},
+ {id:7, slug:"thanh-co-quang-tri", region:"nam", themes:["chien-dau"], status:"dang-bo-sung", y:420, x:200,
+  vi:{name:"Thành cổ Quảng Trị", sum:"Chiến trường ác liệt trong 81 ngày đêm, từ 28/6 đến 16/9/1972, khi quân giải phóng chiến đấu giành lại thị xã và Thành cổ. Nay có đài tưởng niệm và bến thả hoa bên sông Thạch Hãn.",
+      addr:"Phường 2, thị xã Quảng Trị (trước hợp nhất); đơn vị hiện hành cần kiểm tra.", rank:"Di tích quốc gia đặc biệt, Quyết định 2383/QĐ-TTg ngày 9/12/2013 (theo Báo Văn hóa; cần đối chiếu)."},
+  en:{name:"Quảng Trị Citadel", sum:"A fiercely fought battlefield during 81 days and nights, from 28 June to 16 September 1972, when Liberation forces fought to retake the town and the Citadel. Today it has a memorial and a flower-offering wharf on the Thạch Hãn River.",
+      addr:"Ward 2, Quảng Trị Town (before the merger); current unit to be checked.", rank:"Special national monument, Decision 2383/QĐ-TTg of 9 Dec 2013 (per Báo Văn hóa; to be verified)."}},
+ {id:8, slug:"san-bay-ta-con-khe-sanh", region:"nam", themes:["chien-dau"], status:"dang-bo-sung", y:480, x:96,
+  vi:{name:"Sân bay Tà Cơn – Khe Sanh", sum:"Sân bay thuộc cụm cứ điểm quân sự chiến lược của Mỹ ở Khe Sanh (1966–1968). Ngày 9/7/1968, quân giải phóng cắm cờ tại cứ điểm sau bốn đợt tiến công trong Chiến dịch Đường 9 – Khe Sanh. Khu di tích trưng bày các loại máy bay như C-130, UH-1, CH-47 và C-119 (đưa về đầu năm 2026).",
+      addr:"Xã Khe Sanh, tỉnh Quảng Trị (theo báo Nhân Dân).", rank:"Di tích quốc gia, xếp hạng năm 1986 (theo báo Nhân Dân; không nêu là “đặc biệt”; cần đối chiếu)."},
+  en:{name:"Tà Cơn Airfield – Khe Sanh", sum:"An airfield in the US strategic base complex at Khe Sanh (1966–1968). On 9 July 1968 Liberation forces raised their flag there after four assaults in the Route 9 – Khe Sanh Campaign. The site displays aircraft such as the C-130, UH-1, CH-47 and C-119 (brought in early 2026).",
+      addr:"Khe Sanh Commune, Quảng Trị Province (per Nhân Dân).", rank:"National historical site, ranked 1986 (per Nhân Dân; not described as “special”; to be verified)."}}
+];
+
+const THEMES = {
+ "giao-thong":{vi:"Giao thông vận tải và chi viện", en:"Transport and supply"},
+ "tnxp":{vi:"Thanh niên xung phong", en:"Youth volunteers"},
+ "doi-song":{vi:"Đời sống trong chiến tranh", en:"Life in wartime"},
+ "chien-dau":{vi:"Chiến đấu", en:"Combat"},
+ "chia-cat":{vi:"Chia cắt và thống nhất", en:"Division and reunification"}
+};
+const REG = {bac:{vi:"Bắc Quảng Trị", en:"North Quảng Trị"}, nam:{vi:"Nam Quảng Trị", en:"South Quảng Trị"}};
+const VID = {
+ "dang-bo-sung":{vi:"Đang bổ sung video", en:"Video coming soon"},
+ "mau":{vi:"Video mẫu minh họa", en:"Sample video (illustration)"},
+ "hoan-chinh":{vi:"Video hoàn chỉnh", en:"Completed video"}
+};
+
+/* VIDEO: danh sách video nằm trong tệp videos.js (tạo bằng công cụ them-video.html), không cần sửa ở đây. */
+const VIDEOS = (window.DADS_VIDEOS && typeof window.DADS_VIDEOS === "object") ? window.DADS_VIDEOS : {};
+const esc = x => String(x).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const safeSrc = x => (typeof x === "string" && (/^https:\/\/[^\s"'<>]+$/.test(x) || /^[\w\-./%]+$/.test(x))) ? x : "";
+function vlist(s) {
+  const a = Array.isArray(VIDEOS[s.slug]) ? VIDEOS[s.slug] : [];
+  return a.filter(v => v && ((v.kind === "youtube" && /^[\w-]{11}$/.test(v.id || "")) || (v.kind === "drive" && /^[\w-]{10,}$/.test(v.id || "")) || (v.kind === "file" && safeSrc(v.src))));
+}
+SITES.forEach(s => { if (vlist(s).length) s.status = "hoan-chinh"; });
+let vsel = {};
+
+/* Địa chỉ Google Forms nhận góp ý (để trống nếu chưa có; khi điền, nút "Góp ý" sẽ mở biểu mẫu). */
+const FORM_URL = "";
+
+const T = {
+ vi:{
+  brand:"Dấu ấn di sản Quảng Trị", eyebrow:"Thư viện video song ngữ Việt – Anh", h1:"Dấu ấn di sản Quảng Trị",
+  lede:"Tám di tích lịch sử từ sông Gianh đến Khe Sanh, kể bằng video có phụ đề tiếng Việt và tiếng Anh. Do học sinh và giáo viên Trường THCS Ba Đồn thực hiện.",
+  cta1:"Khám phá 8 di tích", cta2:"Cách sử dụng", heronote:"Video đang được bổ sung dần. Trang nào chưa có video sẽ ghi rõ.",
+  artN:"▲ Bắc Quảng Trị", artS:"▼ Nam Quảng Trị", artR:"Sông Bến Hải, cầu Hiền Lương",
+  nav:["Di tích","Mốc thời gian","Câu đố","Từ khó","Cách sử dụng","Giới thiệu"],
+  hTime:"Dòng thời gian", iTime:"Các mốc lớn rút ra từ phần tóm tắt của từng di tích. Bấm tên di tích để đọc tiếp.", timeNote:"Mốc thời gian lấy từ phần tóm tắt của từng di tích, cần đối chiếu với tài liệu chính thức.",
+  hQuiz:"Câu đố nhỏ", iQuiz:"Năm câu hỏi dựa trên nội dung các trang di tích. Trả lời xong sẽ có giải thích.",
+  qProg:(a,n)=>"Câu "+a+" / "+n, qRight:"Đúng", qWrong:"Chưa đúng", qNext:"Câu tiếp theo", qFinish:"Xem kết quả", qAgain:"Làm lại", qSee:"Đọc về di tích này",
+  qAll:"Tuyệt vời, bạn trả lời đúng cả năm câu.", qGood:"Khá lắm. Hãy đọc thêm các trang di tích để nắm chắc hơn.", qTry:"Hãy đọc các trang di tích rồi thử lại nhé.",
+  hGloss:"Giải nghĩa từ khó", iGloss:"Những từ bạn sẽ gặp khi đọc các trang di tích.",
+  quick:"Số liệu nhanh", think:"Câu hỏi để suy ngẫm", thinkHint:"Đọc phần giới thiệu rồi thảo luận với bạn bè hoặc thầy cô.",
+  hExplore:"Khám phá di tích", iExplore:"Tìm theo tên (có dấu hoặc không dấu), hoặc lọc theo khu vực, chủ đề và tình trạng video.",
+  search:"Tìm di tích", ph:"Gianh, Tam Co, Vinh Moc…", region:"Khu vực", theme:"Chủ đề", video:"Video", all:"Tất cả", clear:"Xóa lọc",
+  maptitle:"Sơ đồ Bắc – Nam", mapnote:"Sơ đồ minh họa theo thứ tự Bắc – Nam, không theo tỉ lệ. Muốn biết vị trí chính xác, bấm “Mở bản đồ”.",
+  vmap:"Sơ đồ", vlist:"Danh sách", count:n=>"Hiển thị "+n+" / 8 di tích",
+  none:"Không có di tích nào phù hợp. Hãy thử từ khóa khác hoặc bấm “Xóa lọc”.",
+  detail:"Xem chi tiết", maps:"Mở bản đồ",
+  hGuide:"Cách sử dụng",
+  steps:[["Tìm hoặc lọc","Gõ tên di tích, có dấu hay không dấu đều được. Có thể lọc theo khu vực, chủ đề, tình trạng video."],
+         ["Chọn một di tích","Bấm chấm trên sơ đồ để thẻ tương ứng nổi lên, rồi bấm “Xem chi tiết”."],
+         ["Xem và đối chiếu","Xem video, đọc tóm tắt, mở vị trí trên Google Maps. Địa chỉ và xếp hạng được ghi riêng để đối chiếu."]],
+  tip:"Đổi ngôn ngữ ở góc trên bên phải: Việt, English hoặc Việt | EN (hiện cả hai cạnh nhau). Trang đang xem và bộ lọc được giữ nguyên.",
+  hAbout:"Giới thiệu",
+  about:[["Dự án","Thư viện video song ngữ Việt – Anh về di tích lịch sử tỉnh Quảng Trị, do học sinh và giáo viên Trường THCS Ba Đồn thực hiện. Mỗi di tích có một trang riêng gồm video, phụ đề và thông tin tóm tắt."],
+         ["Quyền riêng tư","Trang này không hiển thị tên, hình ảnh hay thông tin cá nhân của học sinh."]],
+  warnH:"Nội dung đang được rà soát",
+  foot:"Nội dung tóm tắt từ báo chí và tài liệu tham khảo. Địa chỉ hiện hành, tọa độ, tên chính thức và cấp xếp hạng cần được nhóm dự án kiểm tra trước khi công bố rộng rãi. Bộ lọc “Bắc/Nam Quảng Trị” là cách chia học liệu của dự án (Bắc: khu vực Quảng Bình cũ; Nam: khu vực Quảng Trị cũ).",
+  school:"Trường THCS Ba Đồn",
+  back:"← Tất cả di tích", sumH:"Giới thiệu", factsH:"Thông tin cần đối chiếu", addr:"Địa chỉ", rank:"Xếp hạng",
+  verify:"Cần đối chiếu văn bản chính thức",
+  pickv:"Chọn video", vpart:"Video", playerSoon:"Video sẽ được đăng tại đây", playerSub:"Phụ đề tiếng Việt và tiếng Anh sẽ đi kèm khi có video.",
+  fbH:"Góp ý về di tích này", fbP:"Bạn thấy thông tin chưa đúng hoặc muốn bổ sung? Hãy gửi góp ý, không cần nêu tên.",
+  fbBtn:"Gửi góp ý", fbNo:"Biểu mẫu góp ý sẽ được kết nối khi nhà trường tạo Google Forms.",
+  prev:"Di tích trước", next:"Di tích sau", vi:"Tiếng Việt", en:"English"
+ },
+ en:{
+  brand:"Quang Tri Heritage", eyebrow:"Bilingual Vietnamese–English video library", h1:"Quang Tri Heritage",
+  lede:"Eight historic sites from the Gianh River to Khe Sanh, told in video with Vietnamese and English subtitles. Made by students and teachers of Ba Don Secondary School.",
+  cta1:"Explore the 8 sites", cta2:"How to use", heronote:"Videos are being added gradually. Pages without a video say so clearly.",
+  artN:"▲ North Quảng Trị", artS:"▼ South Quảng Trị", artR:"Bến Hải River, Hiền Lương Bridge",
+  nav:["Sites","Timeline","Quiz","Glossary","How to use","About"],
+  hTime:"Timeline", iTime:"Key dates drawn from each site's summary. Select a site name to read more.", timeNote:"Dates come from each site's summary and are to be checked against official sources.",
+  hQuiz:"Quick quiz", iQuiz:"Five questions based on the site pages. Each answer comes with an explanation.",
+  qProg:(a,n)=>"Question "+a+" of "+n, qRight:"Correct", qWrong:"Not quite", qNext:"Next question", qFinish:"See result", qAgain:"Try again", qSee:"Read about this site",
+  qAll:"Well done, all five answers are correct.", qGood:"Good work. Read more of the site pages to be sure.", qTry:"Read the site pages and try again.",
+  hGloss:"Glossary", iGloss:"Words you will meet on the site pages.",
+  quick:"Quick facts", think:"Questions to think about", thinkHint:"Read the overview, then discuss with friends or teachers.",
+  hExplore:"Explore the sites", iExplore:"Search by name (with or without diacritics), or filter by area, theme and video status.",
+  search:"Search sites", ph:"Gianh, Tam Co, Vinh Moc…", region:"Area", theme:"Theme", video:"Video", all:"All", clear:"Clear filters",
+  maptitle:"North–South diagram", mapnote:"Illustrative diagram in North–South order, not to scale. For exact locations use “Open map”.",
+  vmap:"Diagram", vlist:"List", count:n=>"Showing "+n+" of 8 sites",
+  none:"No matching sites. Try another keyword or press “Clear filters”.",
+  detail:"View details", maps:"Open map",
+  hGuide:"How to use",
+  steps:[["Search or filter","Type a site name, with or without diacritics. You can also filter by area, theme and video status."],
+         ["Pick a site","Tap a dot on the diagram to highlight its card, then press “View details”."],
+         ["Watch and check","Watch the video, read the summary, open the place in Google Maps. Address and ranking are listed separately for checking."]],
+  tip:"Switch language at the top right: Việt, English or Việt | EN (both side by side). Your page and filters stay as they are.",
+  hAbout:"About",
+  about:[["The project","A bilingual Vietnamese–English video library on historic sites in Quảng Trị Province, made by students and teachers of Ba Don Secondary School. Each site has its own page with video, subtitles and a short summary."],
+         ["Privacy","This site does not show students' names, photos or personal information."]],
+  warnH:"Content under review",
+  foot:"Summaries are drawn from news reports and reference sources. Current addresses, coordinates, official names and ranking levels must be verified by the project team before wide publication. The “North/South Quảng Trị” filter is the project's own way of grouping materials (North: former Quảng Bình area; South: former Quảng Trị area).",
+  school:"Ba Don Secondary School",
+  back:"← All sites", sumH:"Overview", factsH:"Information to verify", addr:"Address", rank:"Ranking",
+  verify:"To be verified against official documents",
+  pickv:"Choose video", vpart:"Video", playerSoon:"The video will appear here", playerSub:"Vietnamese and English subtitles will come with the video.",
+  fbH:"Feedback on this site", fbP:"Found something wrong or want to add something? Send feedback, no name needed.",
+  fbBtn:"Send feedback", fbNo:"The feedback form will be connected once the school creates a Google Form.",
+  prev:"Previous site", next:"Next site", vi:"Tiếng Việt", en:"English"
+ }
+};
+
+const $ = id => document.getElementById(id);
+let lang = "vi";
+try { const s = localStorage.getItem("dadsqt-lang"); if (s === "vi" || s === "en" || s === "both") lang = s; } catch (e) {}
+let selected = null;
+const ui = () => T[lang === "en" ? "en" : "vi"];      // chữ giao diện
+const pl = () => lang === "en" ? "en" : "vi";          // ngôn ngữ nội dung chính
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+SITES.forEach(s => { s.key = norm(s.vi.name + " " + s.en.name + " " + s.themes.map(t => THEMES[t].vi + " " + THEMES[t].en).join(" ") + " " + REG[s.region].vi); });
+const gmaps = s => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(s.vi.name + " Quảng Trị");
+const hashOf = s => "#di-tich-" + s.slug;
+
+function buildSelects() {
+  const t = ui(), L = pl();
+  const keep = { fr: $("fr").value, ft: $("ft").value, fv: $("fv").value };
+  const opt = (k, v) => '<option value="' + k + '">' + v + '</option>';
+  $("fr").innerHTML = opt("", t.all) + Object.keys(REG).map(k => opt(k, REG[k][L])).join("");
+  $("ft").innerHTML = opt("", t.all) + Object.keys(THEMES).map(k => opt(k, THEMES[k][L])).join("");
+  $("fv").innerHTML = opt("", t.all) + Object.keys(VID).map(k => opt(k, VID[k][L])).join("");
+  $("fr").value = keep.fr || ""; $("ft").value = keep.ft || ""; $("fv").value = keep.fv || "";
+}
+
+function applyText() {
+  const t = ui(), L = pl();
+  document.documentElement.lang = L;
+  $("brand").textContent = t.brand; $("eyebrow").textContent = t.eyebrow; $("h1").textContent = t.h1; $("lede").textContent = t.lede;
+  $("cta1").textContent = t.cta1; $("cta2").textContent = t.cta2; $("heronote").textContent = t.heronote;
+  $("artN").textContent = t.artN; $("artS").textContent = t.artS; $("artR").textContent = t.artR;
+  $("nav").innerHTML = ["kham-pha", "moc-thoi-gian", "cau-do", "tu-kho", "huong-dan", "gioi-thieu"].map((id, i) => '<a href="#' + id + '">' + t.nav[i] + '</a>').join("");
+  $("h-explore").textContent = t.hExplore; $("i-explore").textContent = t.iExplore;
+  $("lq").textContent = t.search; $("q").placeholder = t.ph; $("lfr").textContent = t.region; $("lft").textContent = t.theme; $("lfv").textContent = t.video;
+  $("clear").textContent = t.clear; $("maptitle").textContent = t.maptitle; $("mapnote").textContent = t.mapnote;
+  $("lgbac").textContent = REG.bac[L]; $("lgnam").textContent = REG.nam[L]; $("vmap").textContent = t.vmap; $("vlist").textContent = t.vlist;
+  $("h-guide").textContent = t.hGuide;
+  $("steps").innerHTML = t.steps.map(s => '<li><h3>' + s[0] + '</h3><p>' + s[1] + '</p></li>').join("");
+  $("tip").textContent = t.tip; $("h-about").textContent = t.hAbout;
+  $("about").innerHTML = t.about.map(b => '<div class="box"><h3>' + b[0] + '</h3><p>' + b[1] + '</p></div>').join("") +
+    '<div class="box warn" style="grid-column:1/-1"><h3>' + t.warnH + '</h3><p>' + t.foot + '</p></div>';
+  $("fname").textContent = t.school; $("foot").textContent = t.brand + " · " + t.eyebrow; $("skip").textContent = lang === "en" ? "Skip to content" : "Đi tới nội dung";
+  ["vi", "en", "both"].forEach(k => $(k === "vi" ? "bvi" : k === "en" ? "ben" : "bboth").setAttribute("aria-pressed", String(lang === k)));
+  buildSelects(); renderExtras();
+}
+
+function filtered() {
+  const q = norm($("q").value), fr = $("fr").value, ft = $("ft").value, fv = $("fv").value;
+  return SITES.filter(s => (!q || q.split(" ").every(w => s.key.includes(w))) && (!fr || s.region === fr) && (!ft || s.themes.includes(ft)) && (!fv || s.status === fv));
+}
+
+function renderHome() {
+  const t = ui(), L = pl(), list = filtered(), ids = new Set(list.map(s => s.id));
+  if (selected && !ids.has(selected)) selected = null;
+  $("status").textContent = t.count(list.length);
+  const box = $("cards");
+  if (!list.length) box.innerHTML = '<div class="empty">' + t.none + '</div>';
+  else box.innerHTML = list.map(s => {
+    const X = s[L], other = lang === "both" ? s.en.name : (L === "vi" ? s.en.name : s.vi.name);
+    return '<article class="card' + (selected === s.id ? ' on' : '') + '" id="c' + s.id + '" data-id="' + s.id + '">' +
+      '<div class="ph ' + s.region + '"><span class="num">' + String(s.id).padStart(2, "0") + '</span><span class="reg">' + REG[s.region][L] + '</span></div>' +
+      '<div class="cbody"><h3>' + X.name + '</h3><p class="alt">' + other + '</p><p class="sum">' + X.sum + '</p>' +
+      '<div class="tags">' + s.themes.map(k => '<span class="tag">' + THEMES[k][L] + '</span>').join("") + '</div>' +
+      '<div class="vid">' + VID[s.status][L] + '</div>' +
+      '<div class="row"><a class="btn" href="' + hashOf(s) + '">' + t.detail + '</a>' +
+      '<a class="btn ghost" href="' + gmaps(s) + '" target="_blank" rel="noopener">' + t.maps + '</a></div></div></article>';
+  }).join("");
+  box.querySelectorAll(".card").forEach(c => c.addEventListener("click", e => { if (e.target.closest("a")) return; select(+c.dataset.id, false); }));
+  drawMap(ids);
+}
+
+function select(id, scroll) {
+  selected = (selected === id) ? null : id; renderHome();
+  if (selected && scroll) {
+    const c = $("c" + selected);
+    if (c) {
+      if ($("layout").dataset.view === "map" && innerWidth <= 820) setView("list");
+      setTimeout(() => {
+        c.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+        const h = c.querySelector("h3"); h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true });
+      }, 30);
+    }
+  }
+}
+
+function drawMap(ids) {
+  const t = ui(), L = pl(), W = 360, H = 560;
+  const par = { vi: "Vĩ tuyến 17 (sông Bến Hải)", en: "17th parallel (Bến Hải River)" }[L];
+  let g = '<rect class="sea" x="0" y="0" width="' + W + '" height="' + H + '" rx="10"/>';
+  g += '<path class="land" d="M0 0 H262 C246 40 270 90 250 150 C236 200 262 250 276 300 C288 345 252 390 228 430 C204 470 170 500 118 560 H0 Z"/>';
+  const s5 = SITES.find(s => s.id === 5);
+  g += '<line class="parallel" x1="0" x2="' + W + '" y1="' + s5.y + '" y2="' + s5.y + '"/><text class="axis" x="8" y="' + (s5.y + 18) + '">' + par + '</text>';
+  g += '<text class="axis" x="8" y="22">' + (L === "vi" ? "Trường Sơn" : "Trường Sơn") + '</text><text class="axis" text-anchor="end" x="' + (W - 8) + '" y="22">' + (L === "vi" ? "Biển Đông" : "East Sea") + '</text>';
+  g += '<text class="axis" text-anchor="middle" x="' + (W / 2) + '" y="14">▲ ' + (L === "vi" ? "Bắc" : "N") + '</text><text class="axis" text-anchor="middle" x="' + (W / 2) + '" y="' + (H - 8) + '">▼ ' + (L === "vi" ? "Nam" : "S") + '</text>';
+  SITES.forEach(s => {
+    const on = selected === s.id, dim = !ids.has(s.id), lab = s[L].name, left = s.x > 200;
+    g += '<g class="node ' + s.region + (on ? ' on' : '') + (dim ? ' dim' : '') + '" tabindex="' + (dim ? -1 : 0) + '" role="button" aria-label="' + lab + '" aria-pressed="' + on + '" data-id="' + s.id + '">' +
+      '<circle cx="' + s.x + '" cy="' + s.y + '" r="9"/><text x="' + (left ? s.x - 14 : s.x + 14) + '" y="' + (s.y + (s.id === 5 ? -10 : 4)) + '" text-anchor="' + (left ? 'end' : 'start') + '">' + s.id + '. ' + lab + '</text></g>';
+  });
+  $("svg").innerHTML = g;
+  $("svg").querySelectorAll(".node").forEach(n => {
+    const id = +n.dataset.id;
+    n.addEventListener("click", () => { if (!n.classList.contains("dim")) select(id, true); });
+    n.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && !n.classList.contains("dim")) { e.preventDefault(); select(id, true); } });
+  });
+}
+
+function mediaHtml(s, v) {
+  const L = pl(), t = (v.title && (v.title[L] || v.title.vi || v.title.en)) || s[L].name;
+  if (v.kind === "youtube") {
+    const src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(v.id) + "?cc_load_policy=1&hl=" + (L === "vi" ? "vi" : "en");
+    return '<iframe src="' + src + '" title="' + esc(t) + '" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+  }
+  if (v.kind === "drive") return '<iframe src="https://drive.google.com/file/d/' + encodeURIComponent(v.id) + '/preview" title="' + esc(t) + '" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>';
+  const src = safeSrc(v.src), poster = safeSrc(v.poster), subs = v.subs || {};
+  const type = /\.webm$/i.test(src) ? "video/webm" : "video/mp4";
+  const tr = ["vi", "en"].filter(k => safeSrc(subs[k])).map(k => '<track kind="subtitles" srclang="' + k + '" label="' + (k === "vi" ? "Tiếng Việt" : "English") + '" src="' + esc(safeSrc(subs[k])) + '"' + (k === L ? ' default' : '') + '>').join("");
+  return '<video controls preload="metadata" playsinline' + (poster ? ' poster="' + esc(poster) + '"' : '') + ' aria-label="' + esc(t) + '"><source src="' + esc(src) + '" type="' + type + '">' + tr + '</video>';
+}
+function playerHtml(s) {
+  const t = ui(), L = pl(), list = vlist(s);
+  if (!list.length) return '<div class="player ' + s.region + '" role="img" aria-label="' + VID[s.status][L] + '"><div><div class="play"></div><strong>' + VID[s.status][L] + '</strong><span>' + t.playerSub + '</span></div></div>';
+  const i = Math.min(vsel[s.slug] || 0, list.length - 1), v = list[i];
+  const title = (v.title && (v.title[L] || v.title.vi || v.title.en)) || "";
+  const tabs = list.length > 1 ? '<div class="vtabs" role="tablist" aria-label="' + t.pickv + '">' + list.map((x, j) => {
+    const tt = (x.title && (x.title[L] || x.title.vi || x.title.en)) || (t.vpart + " " + (j + 1));
+    return '<button type="button" role="tab" class="vtab" aria-selected="' + (j === i) + '" data-i="' + j + '">' + esc(tt) + '</button>';
+  }).join("") + '</div>' : '';
+  return '<div class="vwrap">' + tabs + '<div class="player has">' + mediaHtml(s, v) + '</div>' + (title ? '<p class="vcap">' + esc(title) + '</p>' : '') + '</div>';
+}
+function quickHtml(s) {
+  const k = pl() === "vi" ? 1 : 2, e = EXTRA[s.slug][0];
+  return '<h2 class="qh">' + ui().quick + '</h2><div class="quick">' + e.map(f => '<div class="qf"><b>' + ((pl() === "en" && f[3]) || f[0]) + '</b><span>' + f[k] + (lang === "both" ? '<i>' + f[2] + '</i>' : '') + '</span></div>').join("") + '</div>';
+}
+function thinkHtml(s) {
+  const q = EXTRA[s.slug][1], t = ui(), L = pl();
+  const items = lang === "both" ? [[q[0], q[1]], [q[2], q[3]]].map(p => '<li>' + p[0] + '<i>' + p[1] + '</i></li>') : (L === "vi" ? [q[0], q[2]] : [q[1], q[3]]).map(x => '<li>' + x + '</li>');
+  return '<div class="think"><h2>' + t.think + '</h2><p class="thint">' + t.thinkHint + '</p><ol>' + items.join("") + '</ol></div>';
+}
+function renderDetail(s) {
+  const t = ui(), L = pl(), i = SITES.indexOf(s), prev = SITES[i - 1], next = SITES[i + 1];
+  const X = s[L], both = lang === "both";
+  const alt = both ? s.en.name : (L === "vi" ? s.en.name : s.vi.name);
+  const sum = both
+    ? '<div class="lang2"><div><span class="lbl">' + T.vi.vi + '</span><p>' + s.vi.sum + '</p></div><div><span class="lbl">' + T.vi.en + '</span><p>' + s.en.sum + '</p></div></div>'
+    : '<p>' + X.sum + '</p>';
+  const fact = (k, v) => '<div><dt>' + k + '</dt><dd>' + v + '</dd></div>';
+  const facts = both
+    ? fact(T.vi.addr + " / Address", s.vi.addr + '<br><i>' + s.en.addr + '</i>') + fact(T.vi.rank + " / Ranking", s.vi.rank + '<br><i>' + s.en.rank + '</i>')
+    : fact(t.addr, X.addr) + fact(t.rank, X.rank);
+  const fb = FORM_URL
+    ? '<a class="btn" href="' + FORM_URL + '" target="_blank" rel="noopener">' + t.fbBtn + '</a>'
+    : '<div><span class="btn" aria-disabled="true">' + t.fbBtn + '</span></div>';
+  $("detail").innerHTML =
+    '<div class="wrap dwrap">' +
+    '<a class="back" href="#kham-pha">' + t.back + '</a>' +
+    '<div class="dhead"><span class="big" aria-hidden="true">' + String(s.id).padStart(2, "0") + '</span><div><h1 id="dh1" tabindex="-1">' + X.name + '</h1><p class="altn">' + alt + '</p></div></div>' +
+    '<div class="chips"><span class="chip ' + s.region + '">' + REG[s.region][L] + '</span>' + s.themes.map(k => '<span class="chip">' + THEMES[k][L] + '</span>').join("") + '</div>' +
+    playerHtml(s) +
+    quickHtml(s) +
+    '<div class="dgrid' + (both ? ' both' : '') + '">' +
+      '<div class="dsum"><h2>' + t.sumH + '</h2>' + sum +
+      '<div class="row" style="margin-top:16px"><a class="btn ghost" href="' + gmaps(s) + '" target="_blank" rel="noopener">' + t.maps + '</a></div></div>' +
+      '<div class="facts"><h2>' + t.factsH + '</h2><span class="verify">' + t.verify + '</span><dl>' + facts + '</dl></div>' +
+    '</div>' +
+    thinkHtml(s) +
+    '<div class="fb"><div><h2 style="font-size:1.05rem;color:var(--green);margin-bottom:6px">' + t.fbH + '</h2><p>' + t.fbP + (FORM_URL ? '' : ' ' + t.fbNo) + '</p></div>' + fb + '</div>' +
+    '<nav class="pn" aria-label="Pagination">' +
+      (prev ? '<a href="' + hashOf(prev) + '"><small>← ' + t.prev + '</small><b>' + prev[L].name + '</b></a>' : '<a class="ghost" aria-hidden="true" tabindex="-1">&nbsp;</a>') +
+      (next ? '<a href="' + hashOf(next) + '"><small>' + t.next + ' →</small><b>' + next[L].name + '</b></a>' : '<a class="ghost" aria-hidden="true" tabindex="-1">&nbsp;</a>') +
+    '</nav></div>';
+  $("detail").querySelectorAll(".vtab").forEach(btn => btn.onclick = () => {
+    vsel[s.slug] = +btn.dataset.i; renderDetail(s);
+    const on = $("detail").querySelector('.vtab[aria-selected="true"]'); if (on) on.focus({ preventScroll: true });
+  });
+}
+
+function setView(v) { $("layout").dataset.view = v; $("vmap").setAttribute("aria-pressed", String(v === "map")); $("vlist").setAttribute("aria-pressed", String(v === "list")); }
+
+let current = null; // di tích đang xem, null = trang chủ
+function route() {
+  let h = ""; try { h = decodeURIComponent(location.hash.slice(1)); } catch (e) {}
+  const s = h.indexOf("di-tich-") === 0 ? SITES.find(x => "di-tich-" + x.slug === h) : null;
+  if (s) {
+    const changed = current !== s;
+    current = s; renderDetail(s);
+    $("home").hidden = true; $("detail").hidden = false;
+    if (changed) { window.scrollTo(0, 0); const d = $("dh1"); if (d) d.focus({ preventScroll: true }); }
+  } else {
+    current = null; $("detail").hidden = true; $("home").hidden = false;
+    const el = h && $(h);
+    if (el) el.scrollIntoView(); else window.scrollTo(0, 0);
+  }
+}
+
+
+/* ===== PHẦN GIÁO DỤC: số liệu nhanh, câu hỏi suy ngẫm, mốc thời gian, câu đố, từ khó =====
+   Mọi số liệu lấy từ phần tóm tắt của từng di tích ở trên, nên cũng cần đối chiếu như các phần đó. */
+const EXTRA = {
+ "ben-pha-gianh":[
+  [["19/4/2026","Khánh thành khu di tích sau tôn tạo","Renovated memorial inaugurated"],["QL 1A","Bến phà trên Quốc lộ 1A","Ferry on National Highway 1A","NH 1A"]],
+  ["Vì sao các bến phà thường bị đánh phá ác liệt trong chiến tranh?","Why were ferry crossings so often bombed in wartime?","Sau khi được tôn tạo, di tích giúp người trẻ hiểu thêm điều gì về quá khứ?","What can a renovated memorial teach young people about the past?"]],
+ "hang-tam-co":[
+  [["14/11/1972","Ngày 13 cán bộ, chiến sĩ hy sinh trong hang","Day 13 officers and soldiers died in the cave"],["13","Người hy sinh: 8 thanh niên xung phong, 5 pháo binh (theo báo Nhân Dân)","Lives lost: 8 youth volunteers, 5 artillerymen (per Nhân Dân)"]],
+  ["Vì sao một hang đá bình thường lại trở thành di tích?","Why did an ordinary cave become a historic site?","Thanh niên xung phong đã làm những việc gì để giữ cho đường không bị tắc?","What did youth volunteers do to keep the roads open?"]],
+ "pha-long-dai":[
+  [["Đường 15","Tuyến đường qua bến phà","Route crossing the ferry","Route 15"],["9/1972","16 thanh niên xung phong Đại đội 130 hy sinh","16 youth volunteers of Company 130 died"]],
+  ["Vì sao nơi này được gọi là “yết hầu” của con đường chi viện?","Why was this place called the “throat” of the supply route?","Việc vượt sông bằng phà khác gì so với đi qua cầu?","How is crossing a river by ferry different from using a bridge?"]],
+ "ben-pha-xuan-son":[
+  [["1965","Năm mở bến phà (theo trang du lịch, cần đối chiếu)","Year the ferry opened (travel-site info, to be checked)"],["Sông Son","Bến phà ở gần Phong Nha","Ferry near Phong Nha","Son River"]],
+  ["Một bến đò dân sinh trở thành điểm vận chuyển chi viện như thế nào?","How did a local river crossing become a supply point?","Em có thể tìm thêm tư liệu ở đâu để kiểm tra thông tin này?","Where could you find more sources to check this information?"]],
+ "hien-luong-ben-hai":[
+  [["17","Vĩ tuyến, giới tuyến quân sự tạm thời","Parallel, temporary military demarcation line"],["1952 · 1967","Năm xây cầu · năm bị đánh sập","Year built · year destroyed"]],
+  ["Vì sao một cây cầu lại trở thành biểu tượng của sự chia cắt?","Why did a bridge become a symbol of division?","Việc xây lại cầu sau thống nhất có ý nghĩa gì?","What does rebuilding the bridge after reunification mean?"]],
+ "dia-dao-vinh-moc":[
+  [["gần 2.000 m","Chiều dài địa đạo","Length of the tunnels","nearly 2,000 m"],["3 tầng","Sâu khoảng 8–10 m, 12–15 m và 20–23 m","Levels about 8–10 m, 12–15 m and 20–23 m deep","3 levels"],["khoảng 60","Gia đình sống trong hầm","Families lived inside","about 60"],["17","Em bé chào đời trong hầm","Babies born inside"]],
+  ["Vì sao người dân phải sống dưới lòng đất?","Why did people have to live underground?","Một làng hầm cần có những gì để người ta sống được nhiều năm?","What does an underground village need so people can live there for years?"]],
+ "thanh-co-quang-tri":[
+  [["81","Ngày đêm chiến đấu","Days and nights of fighting"],["28/6–16/9/1972","Thời gian của trận chiến","Dates of the battle"]],
+  ["Vì sao nơi đây có bến thả hoa bên sông Thạch Hãn?","Why is there a flower-offering wharf on the Thạch Hãn River?","Em muốn nói gì khi đứng trước đài tưởng niệm?","What would you want to say standing before the memorial?"]],
+ "san-bay-ta-con-khe-sanh":[
+  [["1966–1968","Thời gian của cứ điểm","Years of the base"],["9/7/1968","Ngày quân giải phóng cắm cờ tại cứ điểm","Day Liberation forces raised their flag"]],
+  ["Vì sao một sân bay lại quan trọng trong một chiến dịch?","Why does an airfield matter in a campaign?","Việc trưng bày máy bay giúp khách tham quan hiểu thêm điều gì?","What does displaying aircraft help visitors understand?"]]
+};
+
+const TIMELINE = [
+ ["1952","1952","hien-luong-ben-hai","Cầu Hiền Lương do Pháp xây.","The Hiền Lương Bridge is built by the French."],
+ ["1954","1954","hien-luong-ben-hai","Hiệp định Genève: vĩ tuyến 17 thành giới tuyến quân sự tạm thời.","Geneva Accords: the 17th parallel becomes the temporary military demarcation line."],
+ ["1965","1965","dia-dao-vinh-moc","Người dân Vĩnh Linh bắt đầu đào địa đạo Vịnh Mốc.","People of Vĩnh Linh begin digging the Vịnh Mốc tunnels."],
+ ["1965","1965","ben-pha-xuan-son","Mở bến phà Xuân Sơn (theo trang du lịch, cần đối chiếu).","Xuân Sơn Ferry opens (travel-site info, to be checked)."],
+ ["1966","1966–1968","san-bay-ta-con-khe-sanh","Cụm cứ điểm Khe Sanh của Mỹ hoạt động.","The US base complex at Khe Sanh is in operation."],
+ ["1967","1967","hien-luong-ben-hai","Cầu Hiền Lương bị đánh sập.","The Hiền Lương Bridge is destroyed."],
+ ["1968","9/7/1968","san-bay-ta-con-khe-sanh","Quân giải phóng cắm cờ tại cứ điểm Khe Sanh.","Liberation forces raise their flag at the Khe Sanh base."],
+ ["1972a","28/6–16/9/1972","thanh-co-quang-tri","81 ngày đêm chiến đấu ở thị xã và Thành cổ Quảng Trị.","81 days and nights of fighting for Quảng Trị town and the Citadel."],
+ ["1972b","9/1972","pha-long-dai","16 thanh niên xung phong Đại đội 130 hy sinh tại phà Long Đại.","16 youth volunteers of Company 130 die at Long Đại Ferry."],
+ ["1972c","14/11/1972","hang-tam-co","13 cán bộ, chiến sĩ hy sinh trong hang Tám Cô.","13 officers and soldiers die in Tám Cô Cave."],
+ ["2026","19/4/2026","ben-pha-gianh","Khánh thành khu di tích Bến phà Gianh sau tôn tạo.","The renovated Gianh Ferry memorial is inaugurated."]
+];
+
+const QUIZ = [
+ {q:["Cầu Hiền Lương bắc qua sông nào?","Which river does the Hiền Lương Bridge cross?"], o:["Sông Gianh","Sông Thạch Hãn","Sông Bến Hải","Sông Son"].map(x=>[x,x.replace("Sông ","")+" River"]), a:2,
+  e:["Cầu Hiền Lương bắc qua sông Bến Hải, ở vĩ tuyến 17.","The Hiền Lương Bridge crosses the Bến Hải River at the 17th parallel."], s:"hien-luong-ben-hai"},
+ {q:["Trận chiến ở Thành cổ Quảng Trị năm 1972 kéo dài bao lâu?","How long did the 1972 battle for the Quảng Trị Citadel last?"], o:[["18 ngày đêm","18 days and nights"],["81 ngày đêm","81 days and nights"],["100 ngày đêm","100 days and nights"],["9 ngày đêm","9 days and nights"]], a:1,
+  e:["Trận chiến kéo dài 81 ngày đêm, từ 28/6 đến 16/9/1972.","The battle lasted 81 days and nights, from 28 June to 16 September 1972."], s:"thanh-co-quang-tri"},
+ {q:["Địa đạo Vịnh Mốc có mấy tầng?","How many levels do the Vịnh Mốc tunnels have?"], o:[["2 tầng","2 levels"],["4 tầng","4 levels"],["5 tầng","5 levels"],["3 tầng","3 levels"]], a:3,
+  e:["Địa đạo có 3 tầng, sâu khoảng 8–10 m, 12–15 m và 20–23 m.","The tunnels have 3 levels, about 8–10 m, 12–15 m and 20–23 m deep."], s:"dia-dao-vinh-moc"},
+ {q:["Sau Hiệp định Genève 1954, giới tuyến quân sự tạm thời nằm ở vĩ tuyến nào?","After the 1954 Geneva Accords, which parallel was the temporary military demarcation line?"], o:[["Vĩ tuyến 17","17th parallel"],["Vĩ tuyến 15","15th parallel"],["Vĩ tuyến 20","20th parallel"],["Vĩ tuyến 38","38th parallel"]], a:0,
+  e:["Giới tuyến nằm ở vĩ tuyến 17, dọc sông Bến Hải.","The line lay along the 17th parallel, on the Bến Hải River."], s:"hien-luong-ben-hai"},
+ {q:["Phà Long Đại nằm trên tuyến đường nào?","Which route does Long Đại Ferry sit on?"], o:[["Quốc lộ 1A","National Highway 1A"],["Đường 20","Route 20"],["Đường 9","Route 9"],["Đường 15","Route 15"]], a:3,
+  e:["Phà Long Đại ở trên Đường 15, được gọi là “yết hầu” của con đường chi viện.","Long Đại Ferry is on Route 15, called the “throat” of the supply route."], s:"pha-long-dai"}
+];
+
+const GLOSS = [
+ [["Vĩ tuyến","Parallel (of latitude)"],["Đường tưởng tượng vòng quanh Trái Đất, song song với xích đạo, dùng để chỉ vị trí về phía bắc hay phía nam.","An imaginary line around the Earth parallel to the equator, used to give a position north or south."]],
+ [["Giới tuyến quân sự tạm thời","Temporary military demarcation line"],["Đường ranh giới tạm thời giữa hai bên theo Hiệp định Genève 1954. Ở Việt Nam, đó là vĩ tuyến 17.","A temporary boundary between two sides under the 1954 Geneva Accords. In Vietnam it ran along the 17th parallel."]],
+ [["Địa đạo","Tunnel network"],["Hệ thống đường hầm đào dưới lòng đất để ở, cất giấu và đi lại an toàn.","A system of tunnels dug underground for living, hiding and moving safely."]],
+ [["Thanh niên xung phong","Youth volunteers"],["Lực lượng thanh niên tình nguyện làm những việc như mở đường, giữ đường thông suốt và vận chuyển.","Young volunteers who did work such as building roads, keeping them open and moving supplies."]]
+];
+
+let qi = 0, qscore = 0, qpicked = null;
+function renderTimeline() {
+  const t = ui(), L = pl(), i = L === "vi" ? 3 : 4;
+  $("timeline").innerHTML = TIMELINE.map(e => {
+    const s = SITES.find(x => x.slug === e[2]);
+    return '<li><span class="yr">' + e[1] + '</span><div class="ev"><p>' + e[i] + '</p><a href="#di-tich-' + e[2] + '">' + s[L].name + ' →</a></div></li>';
+  }).join("");
+}
+function renderGloss() {
+  const L = pl(), k = L === "vi" ? 0 : 1;
+  $("gloss").innerHTML = GLOSS.map(g => '<div class="gcard"><h3>' + g[0][k] + '</h3>' + (lang === "both" ? '<p class="en2">' + g[0][1] + '</p>' : '') + '<p>' + g[1][k] + '</p>' + (lang === "both" ? '<p class="en2">' + g[1][1] + '</p>' : '') + '</div>').join("");
+}
+function renderQuiz() {
+  const t = ui(), L = pl(), k = L === "vi" ? 0 : 1, box = $("quiz");
+  if (qi >= QUIZ.length) {
+    const msg = qscore === QUIZ.length ? t.qAll : qscore >= 3 ? t.qGood : t.qTry;
+    box.innerHTML = '<div class="qdone"><p class="qscore">' + qscore + ' / ' + QUIZ.length + '</p><p>' + msg + '</p><button type="button" class="btn" id="qagain">' + t.qAgain + '</button></div>';
+    $("qagain").onclick = () => { qi = 0; qscore = 0; qpicked = null; renderQuiz(); };
+    return;
+  }
+  const Q = QUIZ[qi], done = qpicked !== null;
+  box.innerHTML = '<p class="qprog">' + t.qProg(qi + 1, QUIZ.length) + '</p><h3 class="qq" id="qq">' + Q.q[k] + '</h3>' +
+    '<div class="qopts" role="group" aria-labelledby="qq">' + Q.o.map((o, j) => {
+      let c = "qo"; if (done) { if (j === Q.a) c += " ok"; else if (j === qpicked) c += " bad"; }
+      return '<button type="button" class="' + c + '" data-j="' + j + '"' + (done ? ' disabled' : '') + '>' + o[k] + (done && j === Q.a ? ' <b>✓ ' + t.qRight + '</b>' : '') + (done && j === qpicked && j !== Q.a ? ' <b>✗ ' + t.qWrong + '</b>' : '') + '</button>';
+    }).join("") + '</div>' +
+    (done ? '<div class="qexp" role="status"><p>' + Q.e[k] + '</p><div class="row"><a class="btn ghost" href="#di-tich-' + Q.s + '">' + t.qSee + '</a><button type="button" class="btn" id="qnext">' + (qi + 1 < QUIZ.length ? t.qNext : t.qFinish) + '</button></div></div>' : '');
+  box.querySelectorAll(".qo").forEach(b => b.onclick = () => { qpicked = +b.dataset.j; if (qpicked === Q.a) qscore++; renderQuiz(); const n = $("qnext"); if (n) n.focus({ preventScroll: true }); });
+  const n = $("qnext"); if (n) n.onclick = () => { qi++; qpicked = null; renderQuiz(); };
+}
+function renderExtras() {
+  const t = ui();
+  $("h-time").textContent = t.hTime; $("i-time").textContent = t.iTime; $("timenote").textContent = t.timeNote;
+  $("h-quiz").textContent = t.hQuiz; $("i-quiz").textContent = t.iQuiz;
+  $("h-gloss").textContent = t.hGloss; $("i-gloss").textContent = t.iGloss;
+  renderTimeline(); renderGloss(); renderQuiz();
+}
+
+function setLang(l) {
+  lang = l; try { localStorage.setItem("dadsqt-lang", l); } catch (e) {}
+  applyText(); renderHome(); if (current) renderDetail(current);
+}
+$("bvi").onclick = () => setLang("vi");
+$("ben").onclick = () => setLang("en");
+$("bboth").onclick = () => setLang("both");
+["q", "fr", "ft", "fv"].forEach(id => $(id).addEventListener(id === "q" ? "input" : "change", renderHome));
+$("clear").onclick = () => { $("q").value = ""; $("fr").value = ""; $("ft").value = ""; $("fv").value = ""; selected = null; renderHome(); };
+$("vmap").onclick = () => setView("map"); $("vlist").onclick = () => setView("list");
+window.addEventListener("hashchange", route);
+applyText(); renderHome(); route();
+</script>
+</body>
+</html>
